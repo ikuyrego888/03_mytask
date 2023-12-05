@@ -1,0 +1,157 @@
+body {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  font-size: 32px;
+  width: 100%;
+}
+header {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+h1 {
+  color: #d73888;
+  font-size: 80%;
+  margin: 24px;
+}
+main {
+  width: 100%;
+  display: block;
+  /* border-bottom: 1px solid #ccc; */
+  position: relative;
+  font-size: 80%;
+}
+footer {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+p {
+  font-size: 200%;
+  text-align: center;
+  border-bottom: 1px solid #fff;
+  height: 200px;
+}
+ul {
+  padding: 0;
+  border-top: 1px solid rgb(201, 188, 188);
+  display: table; /* 定義 */
+  table-layout: fixed;
+  width: 40%;
+  font-size: 60%;
+  margin: 0 3%;
+  text-align: center;
+}
+li {
+  list-style-type: none;
+  border: 1px solid rgb(201, 188, 188);
+  background-color: #fff;
+  display: table-cell; /* 定義 */
+  cursor: pointer;
+  color: #d73888;
+}
+li:hover {
+  background: #d73888;
+  opacity: 0.8;
+  color: #fff;
+}
+textarea {
+  margin: 10px 3%;
+  width: 95%;
+  /* height: 60px; */
+  font-size: 60%;
+  box-shadow: 3px 3px 3px 3px #555;
+  background-color: rgb(241, 239, 239);
+}
+#task {
+  margin: 0 3%;
+  width: 95%;
+  font-size: 80%;
+  background-color: rgb(241, 239, 239);
+  box-shadow: 3px 3px 3px 3px #555;
+}
+table {
+  margin: 20px 3%;
+  border: 1px solid rgb(241, 239, 239);
+  width: 96%;
+}
+#tbody {
+  display: none;
+}
+#th_check {
+  width: 4%;
+}
+.checkBox {
+  transform: scale(1.0);
+}
+#done_list th {
+  background-color: #ccc;
+  border-bottom: 1px solid #b2afaf;
+  font-size: 16px;
+  font-weight: normal;
+}
+th {
+  width: 32%;
+  color: #fff;
+  font-size: 16px;
+  font-weight: normal;
+  /* background: linear-gradient(to
+  top, #8addd1,#117f67b4 50%); */
+  /* background: linear-gradient(to
+  top, #a4e3c7,#009cfde0 50%); */
+  /* background-color: #2e8a53; */
+  background-color: #d73888;
+  border-bottom: 1px solid #d873a5;
+}
+#done_list {
+  color: #555;
+}
+#th_date {
+  width: 14%;
+}
+.th_button {
+  width: 6%;
+}
+td {
+  font-size: 16px;
+  background-color: rgb(241, 239, 239);
+  border-bottom: 1px solid 738b7b;
+}
+.updown {
+  text-align: center;
+  /* display: flex; */
+  /* display: inline-block; */
+  vertical-align: middle;
+}
+.up,.down {
+  /* display: block; */
+  display: flex;
+}
+.icon {
+  text-align: center;
+  vertical-align: middle;
+}
+#iconDone {
+  width: 40%;
+}
+#iconDelete {
+  width: 40%;
+}
+#up,#down {
+  font-size: 54%;
+}
+.td_memo {
+  font-size: 40%;
+}
+.td_date {
+  text-align: center;
+  margin: auto;
+  font-size: 40%;
+}
+input {
+  margin: 10px 3%;
+  width: 95%;
+  /* height: 40px; */
+  font-size: 80%;
+}
