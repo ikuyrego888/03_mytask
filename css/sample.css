@@ -2,77 +2,105 @@ body {
   margin: 0;
   padding: 0;
   text-align: left;
-  font-size: 32px;
+  font-size: 62.5%;
   width: 100%;
 }
 header {
   background-color: #fff;
-  border-bottom: 1px solid #ccc;
+  /* border-bottom: 1px solid #ccc; */
   text-align: center;
 }
+
 h1 {
-  color: #d73888;
-  font-size: 80%;
-  margin: 24px;
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  width: 100%;
+  font-family: noteworthy;
+  font-weight: bold;
+  font-size: 3rem;
+  color: #174f3a;
 }
+/* myTaskアイコンのサイズ調整 */
+#iconTask {
+  width: 40%;
+}
+
 main {
   width: 100%;
   display: block;
+  margin-top: 0px;
+  padding-bottom: 8px;
   /* border-bottom: 1px solid #ccc; */
-  position: relative;
-  font-size: 80%;
-}
-footer {
+  /* position: relative; */
+  font-size: 2rem;
+  position: sticky;
+  z-index: 777;
   background-color: #fff;
-  border-bottom: 1px solid #ccc;
-  text-align: center;
 }
-p {
-  font-size: 200%;
-  text-align: center;
-  border-bottom: 1px solid #fff;
-  height: 200px;
+#listTable {
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 38vh;
 }
+
+input {
+  margin: 10px 3%;
+  width: 95%;
+}
+#task {
+  margin: 10px 3%;
+  width: 95%;
+  height: 40px;
+  font-size: 2rem;
+  margin-bottom: 5px;
+  font-family: Meiryo;
+  color: #555;
+  background-color: rgb(241, 239, 239);
+  box-shadow: 3px 3px 3px 3px #c9c6c6;
+  font-family: monospace;
+  border-radius: 6px;
+}
+textarea {
+  margin: 16px 3%;
+  margin-bottom: 8px;
+  width: 95%;
+  font-size: 1.4rem;
+  color: #555;
+  box-shadow: 3px 3px 3px 3px #c9c6c6;
+  background-color: rgb(241, 239, 239);
+  border-radius: 6px;
+}
+
 ul {
   padding: 0;
-  border-top: 1px solid rgb(201, 188, 188);
   display: table; /* 定義 */
   table-layout: fixed;
-  width: 40%;
-  font-size: 60%;
+  width: 60%;
+  font-size: 1rem;
   margin: 0 3%;
   text-align: center;
+  z-index: 888;
 }
 li {
   list-style-type: none;
   border: 1px solid rgb(201, 188, 188);
-  background-color: #fff;
+  background-color: #174f3a;
   display: table-cell; /* 定義 */
   cursor: pointer;
-  color: #d73888;
+  font-family: monospace;
+  font-size: 1.3rem;
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 20px;
 }
 li:hover {
-  background: #d73888;
-  opacity: 0.8;
+  opacity: 0.4;
   color: #fff;
 }
-textarea {
-  margin: 10px 3%;
-  width: 95%;
-  /* height: 60px; */
-  font-size: 60%;
-  box-shadow: 3px 3px 3px 3px #555;
-  background-color: rgb(241, 239, 239);
-}
-#task {
-  margin: 0 3%;
-  width: 95%;
-  font-size: 80%;
-  background-color: rgb(241, 239, 239);
-  box-shadow: 3px 3px 3px 3px #555;
-}
 table {
-  margin: 20px 3%;
+  margin: 0 3%;
   border: 1px solid rgb(241, 239, 239);
   width: 96%;
 }
@@ -86,23 +114,29 @@ table {
   transform: scale(1.0);
 }
 #done_list th {
-  background-color: #ccc;
-  border-bottom: 1px solid #b2afaf;
-  font-size: 16px;
+  background-color: #969393;
+  font-size: 1.3rem;
   font-weight: normal;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 th {
   width: 32%;
   color: #fff;
-  font-size: 16px;
+  font-size: 1.3rem;
+  font-family: monospace;
   font-weight: normal;
-  /* background: linear-gradient(to
-  top, #8addd1,#117f67b4 50%); */
-  /* background: linear-gradient(to
-  top, #a4e3c7,#009cfde0 50%); */
-  /* background-color: #2e8a53; */
-  background-color: #d73888;
-  border-bottom: 1px solid #d873a5;
+  background-color: #478272;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  position: sticky;
+  z-index: 888;
+  top: 0;
+}
+#doneTable {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 24vh; 
 }
 #done_list {
   color: #555;
@@ -114,9 +148,12 @@ th {
   width: 6%;
 }
 td {
-  font-size: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 1.3rem;
+  font-family: Meiryo;
+  color: #555;
   background-color: rgb(241, 239, 239);
-  border-bottom: 1px solid 738b7b;
 }
 .updown {
   text-align: center;
@@ -142,16 +179,14 @@ td {
   font-size: 54%;
 }
 .td_memo {
-  font-size: 40%;
+  font-size: 1rem;
 }
 .td_date {
   text-align: center;
   margin: auto;
-  font-size: 40%;
+  font-size: 1rem;
 }
-input {
-  margin: 10px 3%;
-  width: 95%;
-  /* height: 40px; */
-  font-size: 80%;
+footer {
+  background-color: #fff;
+  text-align: center;
 }
