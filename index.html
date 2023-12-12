@@ -149,6 +149,16 @@
             })
         })
 
+        // done_listへ移動したものを選択して削除する
+        $("#clear_02").on("click",function(){
+            $("#done_list input[type=checkbox]:checked").each(function(){
+                let valKey = $(this).closest("tr").attr("value"); //削除する行のvalueを取得
+                // console.log(valKey);
+                localStorage.removeItem(valKey); // valueと一致するKeyをlocalstorageから削除
+                $(this).closest("tr").remove(); // タスクから削除
+            })
+        })
+
         // 完了したタスクをdone_listへ移動する
         $(".done").on("click",function(){
             let doneTask = $(this).closest("tr");
@@ -196,6 +206,7 @@
                     localStorage.removeItem(doneCheck.now_cv);
                 })
             })
+            location.reload();
         })
 
         // 並び替え うまく反応せず（断念）
@@ -249,9 +260,18 @@
             $(this).closest("tr").remove(); // タスクから削除
         })
 
-        //選択して削除する//
+        // 選択して削除する
         $("#clear_02").on("click",function(){
             $("#list input[type=checkbox]:checked").each(function(){
+                let valKey = $(this).closest("tr").attr("value"); //削除する行のvalueを取得
+                // console.log(valKey);
+                localStorage.removeItem(valKey); // valueと一致するKeyをlocalstorageから削除
+                $(this).closest("tr").remove(); // タスクから削除
+            })
+        })
+        // done_listへ移動したものを選択して削除する
+        $("#clear_02").on("click",function(){
+            $("#done_list input[type=checkbox]:checked").each(function(){
                 let valKey = $(this).closest("tr").attr("value"); //削除する行のvalueを取得
                 // console.log(valKey);
                 localStorage.removeItem(valKey); // valueと一致するKeyをlocalstorageから削除
@@ -296,7 +316,7 @@
                     console.log(checkedValue);
                     let doneCheck = JSON.parse(localStorage.getItem(checkedValue));
                     console.log(doneCheck);
-                    console.log(doneCheck.now_cv);
+                    // console.log(doneCheck.now_cv);
                     now_cv = "done_" + doneCheck.now_cv;
                     console.log(now_cv);
                     task = doneCheck.task;
@@ -309,10 +329,11 @@
                     localStorage.removeItem(doneCheck.now_cv);
                 })
             })
+            location.reload();
         })
     }
 
-    // Enterキー押すとsaveがクリックされる
+    // œEnterキー押すとsaveがクリックされる
     $("#task").on("keydown",function(event){
         // && !e.shihtKeyを設定することで Shiftキー＋Enterキー の場合は改行
         if (event.which === 13 && !event.shiftKey){
