@@ -228,111 +228,116 @@
         console.log(element);
         const row = JSON.parse(localStorage.getItem(element));
         console.log(row);
-        console.log(row.now_cv);
-        console.log(row.task);
-        console.log(row.memo);
-        console.log(row.now_date);
+        // 他のlocalstrageのデータと干渉しないようにするため
+        if(row.now_cv) {
+            console.log(row.now_cv);
+            console.log(row.task);
+            console.log(row.memo);
+            console.log(row.now_date);
 
-        // リロード時のtableデータを再現する
-        // "tr"にはvalueをセットする。後でタスク削除する際にこのvalueをlocalstorageのKeyにする為💡
-        let new_row = `<tr value="${row.now_cv}">
-            <td><input type="checkbox" value="${row.now_cv}" class="checkBox"></td>
-            <td> ${row.task} </td>
-            <td class="td_memo"> ${row.memo} </td>
-            <td class="td_date"> ${row.now_date} </td>
-            <td class="updown"><button class="up"> <span id="up">${"▲"}</span> </button><button class="down"> <sapn id="down">${"▼"}</sapn> </button></td>
-            <td class="icon"><img src="img/iconDone_02.png" id="iconDone" class="done"></td>
-            <td class="icon"><img src="img/iconDelete.png" id="iconDelete" class="delete"></td>
-        </tr>`
-        // ローカルストレージのKey頭に"done_"が付いていたら#done_listへ表示（それ以外は#listへ表示）
-        let doneKey = row.now_cv;
-        if (doneKey.includes("done_")){
-            // console.log(true);
-            $("#done_list tbody").prepend(new_row)
-        } else {
-            // console.log(false);
-            $("#list tbody").prepend(new_row)
-        }
-
-        //deleteボタンで行とローカルストレージのデータを削除する//
-        $(".delete").on("click",function(){
-            let valKey = $(this).closest("tr").attr("value"); //削除する行のvalueを取得
-            console.log(valKey);
-            localStorage.removeItem(valKey); // valueと一致するKeyをlocalstorageから削除
-            $(this).closest("tr").remove(); // タスクから削除
-        })
-
-        // 選択して削除する
-        $("#clear_02").on("click",function(){
-            $("#list input[type=checkbox]:checked").each(function(){
-                let valKey = $(this).closest("tr").attr("value"); //削除する行のvalueを取得
-                // console.log(valKey);
-                localStorage.removeItem(valKey); // valueと一致するKeyをlocalstorageから削除
-                $(this).closest("tr").remove(); // タスクから削除
-            })
-        })
-        // done_listへ移動したものを選択して削除する
-        $("#clear_02").on("click",function(){
-            $("#done_list input[type=checkbox]:checked").each(function(){
-                let valKey = $(this).closest("tr").attr("value"); //削除する行のvalueを取得
-                // console.log(valKey);
-                localStorage.removeItem(valKey); // valueと一致するKeyをlocalstorageから削除
-                $(this).closest("tr").remove(); // タスクから削除
-            })
-        })
-
-        // 完了したタスクをdone_listへ移動する
-        $(".done").on("click",function(){
-            let doneTask = $(this).closest("tr");
-            let doneID = doneTask.closest("table").attr("id");
-            if( doneID == "done_list"){
-                return; // done_listに移動している場合は再度移動させない（＝doneボタン反応させない）
+            // リロード時のtableデータを再現する
+            // "tr"にはvalueをセットする。後でタスク削除する際にこのvalueをlocalstorageのKeyにする為💡
+            let new_row = `<tr value="${row.now_cv}">
+                <td><input type="checkbox" value="${row.now_cv}" class="checkBox"></td>
+                <td> ${row.task} </td>
+                <td class="td_memo"> ${row.memo} </td>
+                <td class="td_date"> ${row.now_date} </td>
+                <td class="updown"><button class="up"> <span id="up">${"▲"}</span> </button><button class="down"> <sapn id="down">${"▼"}</sapn> </button></td>
+                <td class="icon"><img src="img/iconDone_02.png" id="iconDone" class="done"></td>
+                <td class="icon"><img src="img/iconDelete.png" id="iconDelete" class="delete"></td>
+            </tr>`
+            // ローカルストレージのKey頭に"done_"が付いていたら#done_listへ表示（それ以外は#listへ表示）
+            let doneKey = row.now_cv;
+            // if (doneKey.includes("done_"))
+            // keyの最初の文字がdone_だったらのif文処理
+            if (/^done_/.test(doneKey)){
+                // console.log(true);
+                $("#done_list tbody").prepend(new_row)
+            } else {
+                // console.log(false);
+                $("#list tbody").prepend(new_row)
             }
-            $("#done_list tbody").prepend(doneTask);
 
-            // 完了タスクはローカルストレージのKeyを削除して、Key頭に"done_"を付けたKeyにして再セット
-            localStorage.removeItem(row.now_cv);
-            now_cv = "done_" + row.now_cv;
-            task = row.task;
-            memo = row.memo;
-            now_date = row.now_date;
-            let done_ = {now_cv,task,memo,now_date};
-            console.log(done_);
-            localStorage.setItem(now_cv,JSON.stringify(done_));
-        })
+            //deleteボタンで行とローカルストレージのデータを削除する//
+            $(".delete").on("click",function(){
+                let valKey = $(this).closest("tr").attr("value"); //削除する行のvalueを取得
+                console.log(valKey);
+                localStorage.removeItem(valKey); // valueと一致するKeyをlocalstorageから削除
+                $(this).closest("tr").remove(); // タスクから削除
+            })
 
-        // 選択して完了する
-        $("#done_select").on("click",function(){
-            $("#list input[type=checkbox]:checked").each(function(){
+            // 選択して削除する
+            $("#clear_02").on("click",function(){
+                $("#list input[type=checkbox]:checked").each(function(){
+                    let valKey = $(this).closest("tr").attr("value"); //削除する行のvalueを取得
+                    // console.log(valKey);
+                    localStorage.removeItem(valKey); // valueと一致するKeyをlocalstorageから削除
+                    $(this).closest("tr").remove(); // タスクから削除
+                })
+            })
+            // done_listへ移動したものを選択して削除する
+            $("#clear_02").on("click",function(){
+                $("#done_list input[type=checkbox]:checked").each(function(){
+                    let valKey = $(this).closest("tr").attr("value"); //削除する行のvalueを取得
+                    // console.log(valKey);
+                    localStorage.removeItem(valKey); // valueと一致するKeyをlocalstorageから削除
+                    $(this).closest("tr").remove(); // タスクから削除
+                })
+            })
+
+            // 完了したタスクをdone_listへ移動する
+            $(".done").on("click",function(){
                 let doneTask = $(this).closest("tr");
                 let doneID = doneTask.closest("table").attr("id");
                 if( doneID == "done_list"){
                     return; // done_listに移動している場合は再度移動させない（＝doneボタン反応させない）
                 }
-                $(".checkBox").checked = false; //done_listへ移ったらチェックボックス外したいけど反応しない...💡
                 $("#done_list tbody").prepend(doneTask);
-                
+
                 // 完了タスクはローカルストレージのKeyを削除して、Key頭に"done_"を付けたKeyにして再セット
-                $(".checkBox:checked").each(function(){
-                    let checkedValue = $(this).val(); //本当は"data-⚪︎⚪︎"を使用したいが今回はvalで断念...
-                    console.log(checkedValue);
-                    let doneCheck = JSON.parse(localStorage.getItem(checkedValue));
-                    console.log(doneCheck);
-                    // console.log(doneCheck.now_cv);
-                    now_cv = "done_" + doneCheck.now_cv;
-                    console.log(now_cv);
-                    task = doneCheck.task;
-                    memo = doneCheck.memo;
-                    now_date = doneCheck.now_date;
-                    let done_ = {now_cv,task,memo,now_date};
-                    console.log(done_);
-                    localStorage.setItem(now_cv,JSON.stringify(done_));
-                    // 以下のremoveを設定することによって検証ツールでエラー出るが、使えるは使えるので一旦これで諦める
-                    localStorage.removeItem(doneCheck.now_cv);
-                })
+                localStorage.removeItem(row.now_cv);
+                now_cv = "done_" + row.now_cv;
+                task = row.task;
+                memo = row.memo;
+                now_date = row.now_date;
+                let done_ = {now_cv,task,memo,now_date};
+                console.log(done_);
+                localStorage.setItem(now_cv,JSON.stringify(done_));
             })
-            location.reload();
-        })
+
+            // 選択して完了する
+            $("#done_select").on("click",function(){
+                $("#list input[type=checkbox]:checked").each(function(){
+                    let doneTask = $(this).closest("tr");
+                    let doneID = doneTask.closest("table").attr("id");
+                    if( doneID == "done_list"){
+                        return; // done_listに移動している場合は再度移動させない（＝doneボタン反応させない）
+                    }
+                    $(".checkBox").checked = false; //done_listへ移ったらチェックボックス外したいけど反応しない...💡
+                    $("#done_list tbody").prepend(doneTask);
+                    
+                    // 完了タスクはローカルストレージのKeyを削除して、Key頭に"done_"を付けたKeyにして再セット
+                    $(".checkBox:checked").each(function(){
+                        let checkedValue = $(this).val(); //本当は"data-⚪︎⚪︎"を使用したいが今回はvalで断念...
+                        console.log(checkedValue);
+                        let doneCheck = JSON.parse(localStorage.getItem(checkedValue));
+                        console.log(doneCheck);
+                        // console.log(doneCheck.now_cv);
+                        now_cv = "done_" + doneCheck.now_cv;
+                        console.log(now_cv);
+                        task = doneCheck.task;
+                        memo = doneCheck.memo;
+                        now_date = doneCheck.now_date;
+                        let done_ = {now_cv,task,memo,now_date};
+                        console.log(done_);
+                        localStorage.setItem(now_cv,JSON.stringify(done_));
+                        // 以下のremoveを設定することによって検証ツールでエラー出るが、使えるは使えるので一旦これで諦める
+                        localStorage.removeItem(doneCheck.now_cv);
+                    })
+                })
+                location.reload();
+            })
+        }
     }
 
     // œEnterキー押すとsaveがクリックされる
